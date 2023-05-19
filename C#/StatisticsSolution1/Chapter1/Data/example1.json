@@ -1,0 +1,54 @@
+[
+  {
+    "company": "Enterprise",
+    "cars": 643000
+  },
+  {
+    "company": "Hertz",
+    "cars": 327000
+  },
+  {
+    "company": "National/Alamo",
+    "cars": 233000
+  },
+  {
+    "company": "Avis",
+    "cars": 204000
+  },
+  {
+    "company": "Dollar/Thrifty",
+    "cars": 167000
+  },
+  {
+    "company": "Budget",
+    "cars": 144000
+  },
+  {
+    "company": "Advantage",
+    "cars": 20000
+  },
+  {
+    "company": "U-Save",
+    "cars": 12000
+  },
+  {
+    "company": "Payless",
+    "cars": 10000
+  },
+  {
+    "company": "ACE",
+    "cars": 9000
+  },
+  {
+    "company": "Fox",
+    "cars": 9000
+  },
+  {
+    "company": "Rent-A-Wreck",
+    "cars": 7000
+  },
+  {
+    "company": "Triangle",
+    "cars": 6000
+  }
+]
