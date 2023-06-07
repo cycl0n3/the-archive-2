@@ -1,0 +1,40 @@
+<!-- Loïc Bertrand -->
+<!-- Tetris recreation with p5.js -->
+
+<!DOCTYPE html>
+<html>
+
+<head lang="fr">
+  <meta charset="utf-8">
+  <title>Tetris</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta name="theme-color" content="#263238">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+  <section id="game-wrapper">
+    <div id="canvas-holder"></div>
+    <aside id="info">
+      <h1>Tetris</h1>
+      <h2>Next</h2>
+      <div id="next-piece-holder"></div>
+      <h2>Level</h2>
+      <p id="level"></p>
+      <h2>Score</h2>
+      <p id="score"></p>
+      <button id="reset">Reset</button>
+    </aside>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
+  <script src="sketch.js"></script>
+  <script src="shapes.js"></script>  
+  <script src="piece.js"></script>
+  <script src="drawing.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'org.beryx.jlink' version '2.12.0'
+    id 'java'
+}
+
+group 'boggle'
+version '1.0'
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+dependencies {
+    implementation group: 'com.rometools', name: 'rome', version: '1.5.0'
+    implementation 'org.slf4j:slf4j-nop:1.7.25'
+}
+
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.media' ]
+}
+
+mainClassName = "$moduleName/eu.telecomnancy.boggle.Main"
+
+jlink {
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    launcher {
+        name = 'boggle'
+    }
+}

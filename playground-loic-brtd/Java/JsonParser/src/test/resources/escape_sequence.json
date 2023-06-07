@@ -1,0 +1,10 @@
+{
+  "dq": "double\"quote",
+  "bs": "back\\slash",
+  "fs": "forward/slash",
+  "b": "back\nspace",
+  "f": "form\ffeed",
+  "n": "new\nline",
+  "r": "carriage\rreturn",
+  "t": "tab\tulation"
+}

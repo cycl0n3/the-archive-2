@@ -1,0 +1,62 @@
+/* Loïc Bertrand */
+/* Clock of clocks with p5.js */
+/* Inspired by this video : https://www.youtube.com/watch?v=ExkVIQ60ClM */
+
+html {
+  height: 100%;
+}
+
+body {
+  padding:0;
+  margin:0;
+  height: 100%;
+  display: flex;
+  background-color: #111;
+  transition: background-color .2s;
+}
+
+#center {
+  margin: auto;
+  text-align: center;
+}
+
+#canvas-holder {
+  padding: 40px 0;
+  padding: 5vh 0;
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+  position: absolute;
+  left: -9999px;
+}
+
+input[type="checkbox"]#theme + label {
+  width: 60px;
+  height: 30px;
+  display: inline-block;
+  position: relative;
+  font-size: 0;
+  cursor: pointer;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, .5);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .2) inset,
+              0 1px 0 rgba(255, 255, 255, .05);
+}
+
+input[type="checkbox"]#theme + label::before {
+  content: '';
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: left .2s;
+  border-radius: 50%;
+  background-color: #fafafa;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .5);
+}
+
+input[type="checkbox"]#theme:checked + label::before {
+  left: 32px;
+}

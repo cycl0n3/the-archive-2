@@ -1,0 +1,107 @@
+/* Loïc Bertrand */
+/* Tetris recreation with p5.js */
+
+/* Tiny reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: Consolas, mono;
+  display: flex;
+  height: 100%;
+  background-color: #263238;
+}
+
+/* Global game wrapper*/
+#game-wrapper {
+  display: inline-block;
+  margin: auto;
+  background-color: #455A64;
+  font-size: 0;
+  color: white;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, .3);
+}
+
+#canvas-holder {
+  display: inline-block;
+  vertical-align: top;
+  background-color: #607D8B;
+  padding: 30px;
+}
+
+#canvas-holder > canvas {
+  display: block;
+}
+
+/* Player information */
+#info {
+  display: inline-block;
+  vertical-align: top;
+  width: 180px;
+  text-align: center;
+  font-size: 20px;
+}
+
+#info #next-piece-holder {
+  background-color: rgba(0, 0, 0, .5);
+  margin: 16px 0;
+  font-size: 0;
+  text-align: center;
+}
+
+#info #next-piece-holder > canvas {
+  display: inline-block !important;
+}
+
+#info h1 {
+  padding: 20px 0;
+  font-size: 40px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+#info h2 {
+  padding: 8px 0;
+  font-size: 20px;
+  background: rgba(0, 0, 0, .3);
+}
+
+#info p {
+  padding: 8px 0;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+button#reset {
+  font: inherit;
+  color: rgba(0, 0, 0, .8);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 6px 12px;
+  margin-top: 14px;
+  border: 0;
+  border-bottom: 6px solid rgba(0, 0, 0, .3);
+  outline: none;
+  background-color: #00BCD4;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, .3);
+  border-radius: 3px;
+  transition: .1s;
+}
+
+button#reset:active {
+  margin-top: 18px;
+  border-bottom: 2px solid rgba(0, 0, 0, .3);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, .4);
+}
+
+
+

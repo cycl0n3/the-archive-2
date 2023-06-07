@@ -1,0 +1,63 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+#container {
+  text-align: center;
+  max-width: 500px;
+}
+
+.toggle {
+  display: inline-block;
+  margin: 24px 8px;
+  position: relative;
+  width: 120px;
+  height: 60px;
+}
+
+.toggle > label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  background-color: #bdbdbd;
+  border-radius: 1530px;
+  transition: background-color ease-in-out 0.2s;
+  cursor: pointer;
+  box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.1) inset;
+}
+
+.toggle > input[type="checkbox"]:checked + label {
+  background-color: #2190df;
+}
+
+.toggle > label::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 52px;
+  height: 52px;
+  border-radius: 30px;
+  background-color: #f5f5f5;
+  transition: left ease-in-out 0.2s;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2), 0 8px 10px rgba(0, 0, 0, 0.1);
+}
+
+.toggle > input[type="checkbox"]:checked + label::after {
+  left: 64px;
+}
+
+.toggle > input[type="checkbox"] {
+  opacity: 0;
+}

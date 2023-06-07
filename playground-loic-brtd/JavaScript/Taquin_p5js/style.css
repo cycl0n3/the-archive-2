@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-family: monospace;
+}
+
+#container {
+ text-align: center; 
+}
+
+canvas {
+  display: inline;
+}
+
+#controls {
+  padding: 10px;
+  text-align: center;
+}
+
+input,
+button {
+  line-height: 32px;
+  font-size: 20px;
+  font-family: monospace;
+}
+
+input {
+  padding: 0 12px; 
+}

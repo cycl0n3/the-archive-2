@@ -1,0 +1,1 @@
+{"inputSize":2,"hiddenSize":3,"outputSize":1,"weightsIH":{"rows":3,"cols":2,"internal":[[10.2382345,11.821252],[-7.1306953,7.512948],[10.698451,8.931072]]},"weightsHO":{"rows":1,"cols":3,"internal":[[8.21352,-2.2290351,-8.326664]]},"biasH":{"rows":3,"cols":1,"internal":[[-5.390827],[4.549678],[-14.585611]]},"biasO":{"rows":1,"cols":1,"internal":[[-2.0106082]]},"learningRate":0.2}

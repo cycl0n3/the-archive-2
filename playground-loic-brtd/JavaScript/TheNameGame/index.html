@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>The Name Game</title>
+  </head>
+  <body>
+    <main class="container">
+      <h1>The Name Game</h1>
+
+      <form id="nameForm">
+        <div class="field">
+          <label for="nameInput" style="display: none">Name</label>
+          <input
+            type="text"
+            id="nameInput"
+            placeholder="Enter a name..."
+            autocomplete="off"
+          />
+        </div>
+        <button type="submit" id="submitButton">Generate</button>
+      </form>
+      <p id="result"></p>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

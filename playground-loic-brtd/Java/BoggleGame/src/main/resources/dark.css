@@ -1,0 +1,24 @@
+* {
+  -fx-theme: #2C3135;
+  -fx-on-theme: white;
+  -fx-accent: #1e71b3;
+  -fx-on-accent: white;
+  -fx-success: #548541;
+  -fx-on-success: white;
+  -fx-warning: #d96d32;
+  -fx-on-warning: white;
+  -fx-neutral: #2C3135;
+  -fx-on-neutral: white;
+}
+
+.root {
+  -fx-background-color: #191D1F;
+}
+
+.btn-neutral {
+  -fx-border-color: rgba(0, 0, 0, .3);
+}
+
+.lettre {
+  -fx-border-color: rgba(0, 0, 0, .3);
+}

@@ -1,0 +1,37 @@
+
+plugins {
+    id 'application'
+    id 'java'
+}
+
+mainClassName = 'examples.MnistExample'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation files('lib/processing_like.jar')
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation('org.junit.jupiter:junit-jupiter:5.6.2')
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src']
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}

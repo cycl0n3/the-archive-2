@@ -1,0 +1,102 @@
+* {
+  -fx-theme: #01579B;
+  -fx-on-theme: rgba(255, 255, 255, .9);
+  -fx-accent: #01579B;
+  -fx-on-accent: rgba(255, 255, 255, .9);
+  -fx-success: #33691E;
+  -fx-on-success: rgba(255, 255, 255, .9);
+  -fx-warning: #E65100;
+  -fx-on-warning: rgba(255, 255, 255, .9);
+  -fx-neutral: white;
+  -fx-on-neutral: rgba(0, 0, 0, .8);
+}
+
+.root {
+  -fx-background-color: #ddd;
+  -fx-font-family: Monospaced;
+}
+
+.pane-info {
+  -fx-background-color: -fx-theme;
+  -fx-text-fill: -fx-on-theme;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, .5), 20, 0, 0, 0);
+  -fx-padding: 12 12 24 12;
+}
+
+.pane-message {
+  -fx-background-color: -fx-theme;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, .5), 20, 0, 0, 0);
+  -fx-padding: 32 12 12 12;
+}
+
+.pane-controle {
+  -fx-padding: 0 36 0 0;
+}
+
+.label-message {
+  -fx-text-fill: -fx-on-theme;
+  -fx-font-size: 16;
+}
+
+.label-mot {
+  -fx-background-radius: 4;
+  -fx-border-radius: 4;
+  -fx-padding: 6 12;
+  -fx-background-color: rgba(0, 0, 0, 0.2);
+  -fx-font-size: 24;
+  -fx-text-fill: -fx-on-theme;
+}
+
+.label-score {
+  -fx-padding: 0;
+  -fx-font-size: 24;
+  -fx-text-fill: -fx-on-theme;
+}
+
+.btn {
+  -fx-background-radius: 4;
+  -fx-border-radius: 4;
+  -fx-background-color: -fx-neutral;
+  -fx-background-insets: 0;
+  -fx-padding: 6 12 7 12;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, .1), 2, -2, 0, 4);
+  -fx-border-width: 0 0 3 0;
+  -fx-border-color: rgba(0, 0, 0, .1);
+  -fx-text-fill: -fx-on-neutral;
+  -fx-font-size: 16;
+  -fx-cursor: hand;
+}
+
+.btn-success {
+  -fx-background-color: -fx-success;
+  -fx-text-fill: -fx-on-success;
+}
+
+.btn-warning {
+  -fx-background-color: -fx-warning;
+  -fx-text-fill: -fx-on-warning;
+}
+
+.btn-accent {
+  -fx-background-color: -fx-accent;
+  -fx-text-fill: -fx-on-accent;
+}
+
+.lettre {
+  -fx-background-radius: 4;
+  -fx-background-insets: 0;
+  -fx-border-radius: 4;
+  -fx-padding: 0;
+  -fx-background-color: -fx-neutral;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, .1), 2, -2, 0, 4);
+  -fx-border-width: 0 0 3 0;
+  -fx-border-color: rgba(0, 0, 0, .1);
+  -fx-font-size: 24;
+  -fx-text-fill: -fx-on-neutral;
+  -fx-cursor: hand;
+}
+
+.lettre-on {
+  -fx-background-color: -fx-accent;
+  -fx-text-fill: rgba(255, 255, 255, 0.9);
+}

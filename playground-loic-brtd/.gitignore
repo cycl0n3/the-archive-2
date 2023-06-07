@@ -1,0 +1,6 @@
+.idea/
+out/
+bin/
+build
+.gradle
+.p_applet_cache
