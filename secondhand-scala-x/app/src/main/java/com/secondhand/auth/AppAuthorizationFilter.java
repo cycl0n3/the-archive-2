@@ -2,8 +2,6 @@ package com.secondhand.auth;
 
 import com.auth0.jwt.exceptions.TokenExpiredException;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,10 +16,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import scala.Tuple2;
+import groovy.lang.Tuple2;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -31,10 +28,9 @@ public class AppAuthorizationFilter extends OncePerRequestFilter {
 
     private final AuthTokenProvider authTokenProvider;
 
-    private static final String[] ALLOWED_PATHS = {
-        "/api/v1/auth/",
-        "/api/v1/sample/",
-    };
+//    private static final String[] ALLOWED_PATHS = {
+//        "/api/v1/auth/",
+//    };
 
     @Override
     protected void doFilterInternal(
@@ -44,10 +40,10 @@ public class AppAuthorizationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
         log.info("Securing :{} ", request.getServletPath());
 
-        if(Arrays.stream(ALLOWED_PATHS).anyMatch(request.getServletPath()::startsWith)) {
-            log.info("Allowed: {}", request.getServletPath());
-            filterChain.doFilter(request, response);
-        } else {
+//        if(Arrays.stream(ALLOWED_PATHS).anyMatch(request.getServletPath()::startsWith)) {
+//            log.info("Allowed: {}", request.getServletPath());
+//            filterChain.doFilter(request, response);
+//        } else {
             String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
             if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
@@ -55,8 +51,8 @@ public class AppAuthorizationFilter extends OncePerRequestFilter {
                     String token = authorizationHeader.substring(7);
                     Tuple2<String, List<GrantedAuthority>> tuple = authTokenProvider.verifyAndGetAuthorities(token);
 
-                    String username = tuple._1();
-                    List<GrantedAuthority> authorities = tuple._2();
+                    String username = tuple.getV1();
+                    List<GrantedAuthority> authorities = tuple.getV2();
 
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                         username,
@@ -65,31 +61,34 @@ public class AppAuthorizationFilter extends OncePerRequestFilter {
                     );
 
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                    filterChain.doFilter(request, response);
+                    //filterChain.doFilter(request, response);
                 }
                 catch (TokenExpiredException e) {
                     log.error("Error authorization: {} {}", e.getClass(), e.getMessage());
-                    send_error(response, e.getMessage(), HttpServletResponse.SC_UNAUTHORIZED);
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    //set_error(response, e.getMessage(), HttpServletResponse.SC_UNAUTHORIZED);
                 } catch (Exception e) {
                     log.error("Error authorization: {} {}", e.getClass(), e.getMessage());
-                    send_error(response, e.getMessage(), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    //set_error(response, e.getMessage(), HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 }
-            } else {
-                log.info("Authorization header is missing");
-                send_error(response, "Authorization header is missing", HttpServletResponse.SC_UNAUTHORIZED);
+//            } else {
+//                log.info("Authorization header is missing");
+//                send_error(response, "Authorization header is missing", HttpServletResponse.SC_UNAUTHORIZED);
+//            }
             }
-        }
+        filterChain.doFilter(request, response);
     }
 
 
     // write an error method to servlet response
-    private void send_error(HttpServletResponse response, String message, int status) throws IOException {
-        Map<String, String> error = Map.of("error_message", message);
+    private void set_error(HttpServletResponse response, String message, int status) throws IOException {
+        //Map<String, String> error = Map.of("error_message", message);
 
         response.setStatus(status);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
 
-        response.getWriter().write(new ObjectMapper().writeValueAsString(error));
+        //response.setContentType("application/json");
+        //response.setCharacterEncoding("UTF-8");
+        //response.getWriter().write(new ObjectMapper().writeValueAsString(error));
     }
 }

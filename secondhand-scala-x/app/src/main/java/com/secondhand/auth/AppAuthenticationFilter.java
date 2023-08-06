@@ -43,14 +43,25 @@ public class AppAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        log.info("attemptAuthentication: username {} password {}: ", username, password);
+        log.info("attemptAuthentication: username '{}' password '{}': ", username, password);
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
             username,
             password
         );
 
-        return authenticationManager.authenticate(authenticationToken);
+        Authentication authentication = null;
+
+        // try catch block added to handle the case when the user is not found
+        try {
+            authentication = authenticationManager.authenticate(authenticationToken);
+        } catch (AuthenticationException e) {
+            log.info("attemptAuthentication: authentication failed: ", e);
+        }
+
+        log.info("attemptAuthentication: authentication {}: ", authentication);
+
+        return authentication;
     }
 
     @Override
@@ -62,12 +73,9 @@ public class AppAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         Map<String, Object> tokens = authTokenProvider.generateTokens(user);
 
-        if(user1.isPresent()) {
-            UserDto userDto = userMapper.toUserDto(user1.get());
-            // set password to stars
-            userDto.setPassword("*****");
-            tokens.put("user", userDto);
-        }
+        UserDto userDto = userMapper.toUserDto(user1.get());
+
+        tokens.put("user", userDto);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

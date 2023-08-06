@@ -7,16 +7,21 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.*;
 
 @Slf4j
 @RestController
@@ -39,10 +44,6 @@ public class UserController {
         }
 
         List<UserDto> userDtos = userMapper.toUserDto(users);
-
-        // set password to stars for security reasons
-
-        userDtos.forEach(userDto -> userDto.setPassword("*****"));
 
         Map<String, Object> response = new HashMap<>();
         response.put("users", userDtos);
@@ -72,10 +73,6 @@ public class UserController {
 
         UserDto savedUserDto = userMapper.toUserDto(savedUser);
 
-        // set password to stars for security reasons
-
-        savedUserDto.setPassword("*****");
-
         Map<String, Object> response = new HashMap<>();
         response.put("user", savedUserDto);
 
@@ -93,10 +90,6 @@ public class UserController {
 
         UserDto userDto = userMapper.toUserDto(user.get());
 
-        // set password to stars for security reasons
-
-        userDto.setPassword("*****");
-
         Map<String, Object> response = new HashMap<>();
         response.put("user", userDto);
 
@@ -112,11 +105,7 @@ public class UserController {
             return ResponseEntity.noContent().build();
         }
 
-        // set password to stars for security reasons
-
         UserDto userDto = userMapper.toUserDto(user.get());
-
-        userDto.setPassword("*****");
 
         Map<String, Object> response = new HashMap<>();
         response.put("user", userDto);
@@ -126,7 +115,10 @@ public class UserController {
 
     // add role to user and check if that role exists for that user
     @PostMapping("/addRole/{userId}/{roleId}")
-    public ResponseEntity<Map<String, Object>> addRoleToUser(@PathVariable @Min(0) Long userId, @PathVariable @Min(0) Long roleId) {
+    public ResponseEntity<Map<String, Object>> addRoleToUser(
+        @PathVariable @Min(0) Long userId,
+        @PathVariable @Min(0) Long roleId
+    ) {
         Optional<User> user = userService.getUserById(userId);
         Optional<Role> role = roleService.getRoleById(roleId);
 
@@ -149,13 +141,46 @@ public class UserController {
 
         UserDto updatedUserDto = userMapper.toUserDto(updatedUser);
 
-        // set password to stars for security reasons
-
-        updatedUserDto.setPassword("*****");
-
         Map<String, Object> response = new HashMap<>();
         response.put("user", updatedUserDto);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    // upload picture
+    @PostMapping("/picture/{userId}")
+    public ResponseEntity<Map<String, Object>> uploadPicture(
+        @RequestPart("file") MultipartFile file,
+        @PathVariable @Min(0) Long userId
+        ) {
+        try {
+            Optional<User> userOp = userService.getUserById(userId);
+
+            if(userOp.isEmpty()) {
+                log.error("User with id {} not found.", userId);
+                return ResponseEntity.noContent().build();
+            }
+
+            User user = userOp.get();
+
+            InputStream in  = file.getInputStream();
+            File temp = File.createTempFile("temp---1---", ".jpg");
+            Files.copy(in, temp.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+            byte[] data = Files.readAllBytes(temp.toPath());
+            user.setPicture(data);
+            userService.updateUser(user);
+
+            UserDto userDto = userMapper.toUserDto(user);
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("user", userDto);
+
+            return ResponseEntity.ok().body(response);
+        } catch (IOException e) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
     }
 }
